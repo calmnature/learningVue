@@ -3,6 +3,7 @@
     <div class="white-bg">
       <h4>상세페이지임</h4>
       <p>상세페이지 내용임</p>
+      <button @click="modalFlag = false">닫기</button>
     </div>
   </div>
   <div class="menu">
@@ -11,32 +12,23 @@
 
   <div>
     <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="modalFlag = true">{{products[0]}}</h4>
+    <h4 @click="modalFlag = true">{{원룸들[0].title}}</h4>
     <p>50 만원</p>
-    <button @click="increase(0)">허위매물신고</button>
-    <span>신고수 : {{ declare[0] }}</span>
   </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-img">
-    <h4>{{products[1]}}</h4>
-    <p>70 만원</p>
-    <button @click="increase(1)">허위매물신고</button>
-    <span>신고수 : {{ declare[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-img">
-    <h4>{{products[2]}}</h4>
-    <p>90 만원</p>
-    <button @click="increase(2)">허위매물신고</button>
-    <span>신고수 : {{ declare[2] }}</span>
-  </div>
+  <!-- 숙제 : 원룸들의 데이터 6개 모두 출력 -->
 </template>
 
 <script>
+// import {apple, app2} from './asset/oneroom.js';
+// console.log(apple, app2);
+
+import data from './assets/oneroom.js';
+
 export default {
   name : 'App',
   data() {
     return {
+      원룸들 : data,
       modalFlag : false,
       declare: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
