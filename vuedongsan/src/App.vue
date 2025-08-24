@@ -1,7 +1,8 @@
 <template>
+  <!-- 숙제 : 모달창에 HTML 내용 채우기 (이미지, 상품 설명, 가격) -->
   <div class="black-bg" v-if="modalFlag">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
+      <h4>{{원룸들[누른거].title}}</h4>
       <p>상세페이지 내용임</p>
       <button @click="modalFlag = false">닫기</button>
     </div>
@@ -10,24 +11,21 @@
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
   </div>
 
-  <div>
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="modalFlag = true">{{원룸들[0].title}}</h4>
-    <p>50 만원</p>
+  <div v-for="(oneroom, idx) in 원룸들" :key="idx">
+    <img :src="oneroom.image" class="room-img">
+    <h4 @click="modalFlag = true; 누른거 = idx;">{{oneroom.title}}</h4>
+    <p>{{oneroom.price}}</p>
   </div>
-  <!-- 숙제 : 원룸들의 데이터 6개 모두 출력 -->
 </template>
 
 <script>
-// import {apple, app2} from './asset/oneroom.js';
-// console.log(apple, app2);
-
 import data from './assets/oneroom.js';
 
 export default {
   name : 'App',
   data() {
     return {
+      누른거 : 0,
       원룸들 : data,
       modalFlag : false,
       declare: [0, 0, 0],
