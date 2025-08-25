@@ -1,37 +1,36 @@
 <template>
-  <!-- 숙제 : 모달창에 HTML 내용 채우기 (이미지, 상품 설명, 가격) -->
-  <div class="black-bg" v-if="modalFlag">
-    <div class="white-bg">
-      <h4>{{원룸들[누른거].title}}</h4>
-      <p>상세페이지 내용임</p>
-      <button @click="modalFlag = false">닫기</button>
-    </div>
-  </div>
+  <Modal></Modal>
+
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
   </div>
 
+  <!-- <Discount></Discount> -->
+  <Discount/>
+
   <div v-for="(oneroom, idx) in 원룸들" :key="idx">
     <img :src="oneroom.image" class="room-img">
-    <h4 @click="modalFlag = true; 누른거 = idx;">{{oneroom.title}}</h4>
+    <h4 @click="modalFlag = true; clickedIdx = idx;">{{oneroom.title}}</h4>
     <p>{{oneroom.price}}</p>
   </div>
 </template>
 
 <script>
 import data from './assets/oneroom.js';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
 
 export default {
   name : 'App',
   data() {
     return {
-      누른거 : 0,
+      clickedIdx : 0,
       원룸들 : data,
       modalFlag : false,
       declare: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
       products: ['역삼동원룸', '천호동원룸', '마포구원룸'],
-      
+
     }
   },
   methods: {
@@ -40,6 +39,9 @@ export default {
     }
   },
   components : {
+    // Discount: Discount,
+    Discount, // import 한 것과 사용할 컴포넌트의 이름이 같으면 하나로 축약 가능
+    Modal : Modal,
   }
 }
 </script>
@@ -71,12 +73,12 @@ export default {
     color: white;
     padding: 10px;
   }
-  
+
   .room-img{
     width: 100%;
     margin-top: 400px;
   }
-  
+
   .black-bg {
     width: 100%;
     height: 100%;
@@ -91,4 +93,11 @@ export default {
     border-radius: 8px;
     padding: 20px;
   }
-</style> 
+
+  .discount{
+    background-color: #eee;
+    padding: 10ox;
+    margin: 10px;
+    border-radius: 5px;
+  }
+</style>
