@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: 'Discount',
+  // Multi-word 권장으로 이름 변경
+  name: 'DiscountCom',
 }
 </script>
 

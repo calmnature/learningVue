@@ -1,13 +1,18 @@
 <template>
-  <Modal></Modal>
+  <!-- <Modal v-bind:작명="data의변수명"/> -->
+  <!-- <Modal v-bind:onerooms="원룸들"/> -->
+  <Modal :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
 
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
   </div>
 
-  <!-- <Discount></Discount> -->
   <Discount/>
 
+  <!--
+    숙제 : 아래의 반복문을 Card 라는 컴포넌트로 변경
+    단, props의 데이터를 재할당은 불가하기에 @click 같은 것은 제외
+    -->
   <div v-for="(oneroom, idx) in 원룸들" :key="idx">
     <img :src="oneroom.image" class="room-img">
     <h4 @click="modalFlag = true; clickedIdx = idx;">{{oneroom.title}}</h4>
@@ -17,8 +22,8 @@
 
 <script>
 import data from './assets/oneroom.js';
-import Discount from './Discount.vue';
-import Modal from './Modal.vue';
+import Discount from './DiscountCom.vue';
+import Modal from './ModalCom.vue';
 
 export default {
   name : 'App',
