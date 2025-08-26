@@ -1,6 +1,10 @@
 <template>
-  <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
-
+  <!-- <div class="start" :class="{end : modalFlag}">
+    <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
+  </div> -->
+  <transition name="fade">
+    <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
+  </transition>
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
   </div>
@@ -45,6 +49,35 @@ export default {
 </script>
 
 <style>
+  /* .start {
+    opacity: 0;
+    transition: all 1s;
+  }
+  .end {
+    opacity: 1;
+  } */
+  /* 모달창 클릭 시 애니메이션 */
+  .fade-enter-from {
+    /* opacity: 0; */
+    transform: translateY(-1000px);
+  }
+  .fade-enter-active {
+    transition: all 1s;
+  }
+  .fade-enter-to {
+    transform: translateY(0px);
+  }
+  /* 모달창 닫기 시 애니메이션 */
+  .fade-leave-from {
+    opacity: 1;
+  }
+  .fade-leave-active {
+    transition: all 1s;
+  }
+  .fade-leave-to {
+    opacity: 0;
+  }
+
   body {
     margin: 0px;
   }
