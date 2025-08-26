@@ -4,9 +4,11 @@
       <img :src="원룸들[clickedIdx].image">
       <h4>{{원룸들[clickedIdx].title}}</h4>
       <p>{{ 원룸들[clickedIdx].content }}</p>
-      <p>가격 : {{ 원룸들[clickedIdx].price }}</p>
+      <!-- <input @input="month = $event.target.value;"> -->
+      <input v-model="month">
+      <p>{{ month }}개월 선택함 : {{ 원룸들[clickedIdx].price * month }} 원</p>
       <!-- 숙제 : 닫기 버튼 구현 -->
-      <!-- <button @click="modalFlag = false">닫기</button> -->
+      <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
 </template>
@@ -14,9 +16,12 @@
 <script>
 export default {
   name: 'ModalCom',
+  data() {
+    return {
+      month : 1,
+    }
+  },
   props: {
-    // 데이터이름 : 자료형
-    // 틀려도 에러는 안 뜬다고 함 - 디버깅용
     원룸들 : Array,
     clickedIdx : Number,
     modalFlag : Boolean,

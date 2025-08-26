@@ -1,5 +1,5 @@
 <template>
-  <Modal :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
+  <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
 
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
@@ -7,13 +7,6 @@
 
   <Discount/>
 
-  <!-- <Card :oneroom="원룸들[0]"/>
-  <Card :oneroom="원룸들[1]"/>
-  <Card :oneroom="원룸들[2]"/>
-  <Card :oneroom="원룸들[3]"/>
-  <Card :oneroom="원룸들[4]"/>
-  <Card :oneroom="원룸들[5]"/> -->
-  <!-- <Card :oneroom="원룸들[idx]" v-for="(원룸, idx) in 원룸들" :key="idx"/> -->
   <Card @openModal="modalFlag = true; clickedIdx = $event;" :oneroom="원룸" v-for="(원룸, idx) in 원룸들" :key="idx"/>
 
 </template>
