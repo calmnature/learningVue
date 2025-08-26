@@ -14,7 +14,7 @@
   <Card :oneroom="원룸들[4]"/>
   <Card :oneroom="원룸들[5]"/> -->
   <!-- <Card :oneroom="원룸들[idx]" v-for="(원룸, idx) in 원룸들" :key="idx"/> -->
-  <Card :oneroom="원룸" v-for="(원룸, idx) in 원룸들" :key="idx"/>
+  <Card @openModal="modalFlag = true; clickedIdx = $event;" :oneroom="원룸" v-for="(원룸, idx) in 원룸들" :key="idx"/>
 
 </template>
 
