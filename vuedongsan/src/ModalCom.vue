@@ -13,7 +13,6 @@
 
 <script>
 export default {
-  // Multi-word 권장으로 이름 변경
   name: 'ModalCom',
   props: {
     // 데이터이름 : 자료형
