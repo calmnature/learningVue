@@ -1,8 +1,6 @@
 <template>
-  <!-- <div class="start" :class="{end : modalFlag}">
-    <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
-  </div> -->
   <transition name="fade">
+    <!-- 숙제2 : 2개월이하면, 3개월부터 가능하다는 알림 -->
     <Modal @closeModal="modalFlag = false;" :원룸들="원룸들" :clickedIdx="clickedIdx" :modalFlag="modalFlag"/>
   </transition>
 
@@ -10,12 +8,10 @@
     <a v-for="(menu, idx) in menus" :key="idx">{{menu}}</a>
   </div>
 
-  <Discount/>
+  <!-- 숙제1 : 1초마다 30%에서 1%씩 감소 -->
+  <Discount v-if="showDiscount"/>
 
-  <!-- 숙제 : 가격 높은순, 가나다순 정렬 -->
   <button @click="priceSortAsc">가격낮은순정렬</button>
-  <button @click="priceSortDesc">가격높은순정렬</button>
-  <button @click="titleSortAsc">가나다순정렬</button>
   <button @click="sortBack">되돌리기</button>
 
   <Card @openModal="modalFlag = true; clickedIdx = $event;" :oneroom="원룸" v-for="(원룸, idx) in 원룸들" :key="idx"/>
@@ -32,6 +28,7 @@ export default {
   name : 'App',
   data() {
     return {
+      showDiscount : true,
       원룸들오리지널 : [...data],
       clickedIdx : 0,
       원룸들 : data,
@@ -47,40 +44,24 @@ export default {
       this.declare[idx]++;
     },
     priceSortAsc() {
-      // var array = [3, 5, 2];
-      // 문자순 정렬
-      // array.sort(); // 2, 3, 5
-
-      // 숫자순 정렬
-      // array.sort(function(a, b){
-      //   return a - b;
-      // });
-
       this.원룸들.sort(function(a, b){
         return a.price - b.price;
-      });
-    },
-    priceSortDesc() {
-      this.원룸들.sort(function(a, b){
-        return b.price - a.price;
-      });
-    },
-    titleSortAsc() {
-      this.원룸들.sort(function(a, b){
-        if(a.title > b.title) return 1;
-        else if(a.title < b.title) return -1;
       });
     },
     sortBack() {
       this.원룸들 = [...this.원룸들오리지널];
     },
   },
-  components : {
-    // Discount: Discount,
-    Discount, // import 한 것과 사용할 컴포넌트의 이름이 같으면 하나로 축약 가능
+  components: {
+    Discount,
     Modal : Modal,
     Card,
-  }
+  },
+  // mounted() {
+  //   setTimeout(() =>{
+  //     this.showDiscount = false;
+  //   },2000);
+  // },
 }
 </script>
 

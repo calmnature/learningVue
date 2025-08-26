@@ -16,8 +16,13 @@ export default {
   name: 'ModalCom',
   data() {
     return {
-      month : 1,
+      month : 3,
     }
+  },
+  props: {
+    원룸들 : Array,
+    clickedIdx : Number,
+    modalFlag : Boolean,
   },
   watch: {
     month(inputData) {
@@ -30,10 +35,11 @@ export default {
       }
     }
   },
-  props: {
-    원룸들 : Array,
-    clickedIdx : Number,
-    modalFlag : Boolean,
+  beforeUpdate() {
+    if(this.month <= 2) {
+      alert('3개월부터 가능');
+      this.month = 3;
+    }
   }
 }
 </script>
