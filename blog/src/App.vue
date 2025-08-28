@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -22,16 +22,18 @@
       </div>
     </nav>
 
-    <div class="container mt-4 text-center">
-      <h4>뷰로그임</h4>
-      <p>- Vue로 만듦 -</p>
-      <List :블로그글="블로그글"/>
+    <div class="container mt-4">
+      <router-link to="/">홈페이지</router-link>
+      <router-link to="/list">리스트페이지</router-link>
+      <!-- /detail 클릭 시 글 상세페이지로 이동 -->
+      <div class="mt-5">
+        <router-view :블로그글="블로그글"></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import List from './components/List.vue'
 import boardData from './assets/board.js'
 
 export default {
@@ -42,7 +44,6 @@ export default {
     }
   },
   components: {
-    List,
   },
 }
 </script>
