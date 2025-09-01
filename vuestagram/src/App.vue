@@ -10,7 +10,7 @@
       <img src="../public/favicon.ico" class="logo" />
     </div>
 
-    <Container />
+    <Container :인스타데이터="인스타데이터"/>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -23,9 +23,15 @@
 
 <script>
 import Container from "./components/Container.vue";
+import instaData from "./assets/data.js";
 
 export default {
   name: "App",
+  data() {
+    return {
+      인스타데이터 : instaData,
+    }
+  },
   components: {
     Container: Container,
   },

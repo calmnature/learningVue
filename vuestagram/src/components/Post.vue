@@ -2,13 +2,13 @@
   <div class="post">
     <div class="post-header">
       <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <span class="profile-name">{{게시글.name}}</span>
     </div>
     <div class="post-body"></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
-      <p class="date">May 15</p>
+      <p>{{ 게시글.likes }} Likes</p>
+      <p><strong>글쓴이아이디</strong> {{ 게시글.content }}</p>
+      <p class="date">{{ 게시글.date }}</p>
     </div>
   </div>
 </template>
@@ -16,6 +16,9 @@
 <script>
 export default {
   name: "PostCom",
+  props: {
+    게시글 : Object,
+  },
   components: {},
 };
 </script>
