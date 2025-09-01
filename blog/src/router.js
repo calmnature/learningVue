@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from './components/Home.vue';
 import List from './components/List.vue';
 import Detail from './components/Detail.vue';
+import Author from './components/Author.vue';
+import Comment from './components/Comment.vue';
 
 const routes = [
     {
@@ -13,13 +15,22 @@ const routes = [
         component: List,
     },
     {
-        // 파라미터 문법
-        // :id로 설정하면 $route.params.id로 URL의 파라미터를 꺼낼 수 있음
-        // 정규표현식 작성 가능 : /detail/:id(\\d+)
-        // /detail/:id*
-        // /:anything(.*) : 모든 페이지 → 이걸 활용하여 404페이지 생성 가능
-        path: "/detail/:id(\\d+)",
+        path: "/detail/:id",
         component: Detail,
+        // 특정 페이지 내에서 하위 경로를 만들고 싶을 때 children 사용
+        children: [
+            {
+                // path를 /author로 하면 루트/author(localhost:5173/author)가
+                // 되기 때문에 슬래쉬를 빼고 author만 작성해줘야 함
+                // path: "/author",
+                path: "author",
+                component: Author,
+            },
+            {
+                path: "comment",
+                component: Comment,
+            },
+        ]
     },
 ];
 
