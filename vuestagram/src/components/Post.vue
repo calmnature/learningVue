@@ -1,13 +1,13 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
-      <span class="profile-name">{{게시글.name}}</span>
+      <div class="profile" :style="{backgroundImage : `url(${게시글.userImage})`}"></div>
+      <span class="profile-name">{{ 게시글.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{backgroundImage : `url(${게시글.postImage})`}"></div>
     <div class="post-content">
       <p>{{ 게시글.likes }} Likes</p>
-      <p><strong>글쓴이아이디</strong> {{ 게시글.content }}</p>
+      <p><strong>{{ 게시글.name }}</strong> {{ 게시글.content }}</p>
       <p class="date">{{ 게시글.date }}</p>
     </div>
   </div>
