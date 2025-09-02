@@ -11,6 +11,7 @@
     </div>
 
     <Container :인스타데이터="인스타데이터"/>
+    <button @click="more">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -24,17 +25,31 @@
 <script>
 import Container from "./components/Container.vue";
 import instaData from "./assets/data.js";
+import axios from "axios";
 
 export default {
   name: "App",
   data() {
     return {
       인스타데이터 : instaData,
+      moreIdx : 0,
     }
   },
   components: {
     Container: Container,
   },
+  methods: {
+    more() {
+      axios.get(`https://codingapple1.github.io/vue/more${this.moreIdx}.json`)
+      .then(result => {
+        // 요청 성공 시 실행할 코드
+        console.log(result.data);
+        this.인스타데이터.push(result.data);
+        this.moreIdx++;
+        if(this.moreIdx > 1) this.moreIdx - 2;
+      })
+    }
+  }
 };
 </script>
 
