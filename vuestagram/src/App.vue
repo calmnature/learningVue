@@ -10,21 +10,16 @@
       <img src="../public/favicon.ico" class="logo" />
     </div>
 
-    <Container :인스타데이터="인스타데이터" :step="step"/>
+    <!-- 숙제 : 업로드한 이미지를 step1, step2에서 보여주기 -->
+    <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
-        <input type="file" id="file" class="inputfile" />
+        <input @change="upload" type="file" id="file" class="inputfile" />
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
-    <!-- <div v-if="step == 0">내용0</div>
-    <div v-if="step == 1">내용1</div>
-    <div v-if="step == 2">내용2</div>
-    <button @click="step = 0">버튼0</button>
-    <button @click="step = 1">버튼1</button>
-    <button @click="step = 2">버튼2</button> -->
   </div>
 </template>
 
@@ -39,7 +34,8 @@ export default {
     return {
       인스타데이터 : instaData,
       moreIdx : 0,
-      step : 2,
+      step : 0,
+      imageUrl : '',
     }
   },
   components: {
@@ -47,15 +43,26 @@ export default {
   },
   methods: {
     more() {
+      if(this.moreIdx > 1) this.moreIdx -= 2;
       axios.get(`https://codingapple1.github.io/vue/more${this.moreIdx}.json`)
       .then(result => {
         // 요청 성공 시 실행할 코드
         console.log(result.data);
         this.인스타데이터.push(result.data);
         this.moreIdx++;
-        if(this.moreIdx > 1) this.moreIdx - 2;
       })
     },
+
+    upload(e) {
+      let file = e.target.files;
+      console.log(file);
+      
+      let url = URL.createObjectURL(file[0]);
+      console.log(url);
+
+      this.step = 1;
+      this.imageUrl = url
+    }
   }
 };
 </script>
