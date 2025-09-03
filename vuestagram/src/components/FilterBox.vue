@@ -1,7 +1,7 @@
 <template>
   <div :class="`${filter} filter-item`" :style="`background-image:url(${imageUrl})`">
     <slot></slot>
-    <!-- <slot :sendData="sendData"></slot> -->
+    <button @click="fire">버튼</button>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
     props: {
         imageUrl: String,
         filter: String,
+    },
+    methods: {
+        fire() {
+            this.emitter.emit('selectedFilter', this.filter);
+        }
     },
 };
 </script>

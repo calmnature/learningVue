@@ -4,7 +4,7 @@
       <div class="profile" :style="{backgroundImage : `url(${게시글.userImage})`}"></div>
       <span class="profile-name">{{ 게시글.name }}</span>
     </div>
-    <div class="post-body" :style="{backgroundImage : `url(${게시글.postImage})`}"></div>
+    <div :class="`${게시글.filter} post-body`" :style="{backgroundImage : `url(${게시글.postImage})`}"></div>
     <div class="post-content">
       <p>{{ 게시글.likes }} Likes</p>
       <p><strong>{{ 게시글.name }}</strong> {{ 게시글.content }}</p>
@@ -18,6 +18,7 @@ export default {
   name: "PostCom",
   props: {
     게시글 : Object,
+    선택된필터: String,
   },
   components: {},
 };

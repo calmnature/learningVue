@@ -11,7 +11,7 @@
       <img src="../public/favicon.ico" class="logo"/>
     </div>
 
-    <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event"/>
+    <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event" :선택된필터="선택된필터"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
@@ -39,10 +39,19 @@ export default {
       step: 0,
       imageUrl: "",
       userWrite: "",
+      선택된필터: "",
     };
   },
   components: {
     Container: Container,
+  },
+  // 다른 컴포넌트에서 mitt 같은 걸 수신하는 건 일반적으로 mounted에 작성
+  // 단 많이쓰면 어디서 보냈는지 등 관리가 어려워지기 때문에 Vuex를 사용
+  mounted() {
+    // 숙제 : 필터를 눌렀을 때, 스텝1, 스텝2에도 모두 적용시켜 줄 것
+    this.emitter.on('selectedFilter', (filter)=>{
+      this.선택된필터 = filter;
+    });
   },
   methods: {
     more() {
@@ -51,7 +60,6 @@ export default {
         .get(`https://codingapple1.github.io/vue/more${this.moreIdx}.json`)
         .then((result) => {
           // 요청 성공 시 실행할 코드
-          console.log(result.data);
           this.인스타데이터.push(result.data);
           this.moreIdx++;
         });
@@ -59,10 +67,8 @@ export default {
 
     upload(e) {
       let file = e.target.files;
-      console.log(file);
 
       let url = URL.createObjectURL(file[0]);
-      console.log(url);
 
       this.step = 1;
       this.imageUrl = url;
@@ -77,9 +83,8 @@ export default {
         date: "May 15",
         liked: false,
         content: this.userWrite,
-        filter: "perpetua",
+        filter: this.선택된필터,
       };
-      console.log('??? : ' + this.userWrite);
       this.인스타데이터.unshift(내게시물);
       this.step = 0;
     },

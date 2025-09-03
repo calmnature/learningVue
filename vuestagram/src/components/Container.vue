@@ -1,23 +1,14 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post v-for="(data, idx) in 인스타데이터" :게시글="data" :key="idx" />
+      <Post v-for="(data, idx) in 인스타데이터" :게시글="data" :key="idx"/>
     </div>
 
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
-      <div class="upload-image" :style="`background-image:url(${imageUrl})`"></div>
+      <div :class="`${선택된필터} upload-image`" :style="`background-image:url(${imageUrl})`"></div>
       <div class="filters">
-        <!-- 숙제 : filterList의 클래스를 사용하여 각각의 사진에 인스타그램 filter를 입히기 -->
         <FilterBox :imageUrl="imageUrl" v-for="(filter, idx) in filterList" :key="idx" :filter="filter">
-            <!-- 
-                부모 컴포넌트 → 자식 컴포넌트로 보내는 방법 2가지
-                1. props
-                2. slot : 직관적이고 간단하고 HTML 태그 자체도 보낼 수는 있지만, 
-                          자식 컴포넌트에서 class 같은 속성 내에 사용할 순 없음
-                          즉, HTML 내용물을 데이터 바인딩할 때만 사용 가능
-              -->
-            <!-- <template v-slot:default="childData"><span>{{ childData.sendData }}</span></template> -->
             {{ filter }}
         </FilterBox>
       </div>
@@ -25,7 +16,7 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
-      <div class="upload-image" :style="{backgroundImage : `url(${imageUrl})`}"></div>
+      <div :class="`${선택된필터} upload-image`" :style="{backgroundImage : `url(${imageUrl})`}"></div>
       <div class="write">
         <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
       </div>
@@ -48,6 +39,7 @@ export default {
     인스타데이터: Array,
     step: Number,
     imageUrl: String,
+    선택된필터: String,
   },
   components: {
     Post,
