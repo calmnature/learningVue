@@ -6,14 +6,10 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
-      <!-- <div class="upload-image" :style="{backgroundImage : `url(${imageUrl})`}"></div> -->
       <div class="upload-image" :style="`background-image:url(${imageUrl})`"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <!-- 숙제 : filterList의 클래스를 사용하여 각각의 사진에 인스타그램 filter를 입히기 -->
+        <FilterBox :imageUrl="imageUrl" v-for="(filter, idx) in filterList" :key="idx" :filter="filter"></FilterBox>
       </div>
     </div>
 
@@ -29,9 +25,15 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   name: "ContainerCom",
+  data() {
+    return {
+        filterList: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+    }
+  },
   props: {
     인스타데이터: Array,
     step: Number,
@@ -39,6 +41,7 @@ export default {
   },
   components: {
     Post,
+    FilterBox,
   },
 };
 </script>

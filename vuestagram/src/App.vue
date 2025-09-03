@@ -11,7 +11,6 @@
       <img src="../public/favicon.ico" class="logo"/>
     </div>
 
-    <!-- 숙제 : 업로드한 이미지를 step1, step2에서 보여주기 -->
     <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event"/>
     <button @click="more">더보기</button>
 
