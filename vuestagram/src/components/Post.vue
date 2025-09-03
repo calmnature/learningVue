@@ -4,9 +4,9 @@
       <div class="profile" :style="{backgroundImage : `url(${게시글.userImage})`}"></div>
       <span class="profile-name">{{ 게시글.name }}</span>
     </div>
-    <div :class="`${게시글.filter} post-body`" :style="{backgroundImage : `url(${게시글.postImage})`}"></div>
+    <div @click="$store.commit('clickedPicture', 게시글번호)" :class="`${게시글.filter} post-body`" :style="{backgroundImage : `url(${게시글.postImage})`}"></div>
     <div class="post-content">
-      <p>{{ 게시글.likes }} Likes</p>
+      <p>{{ $store.state.likes[게시글번호] }} Likes</p>
       <p><strong>{{ 게시글.name }}</strong> {{ 게시글.content }}</p>
       <p class="date">{{ 게시글.date }}</p>
     </div>
@@ -18,7 +18,8 @@ export default {
   name: "PostCom",
   props: {
     게시글 : Object,
-    선택된필터: String,
+    선택된필터 : String,
+    게시글번호 : Number,
   },
   components: {},
 };

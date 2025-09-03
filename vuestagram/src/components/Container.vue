@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post v-for="(data, idx) in 인스타데이터" :게시글="data" :key="idx"/>
+      <Post v-for="(data, idx) in 인스타데이터" :게시글="data" :key="idx" :게시글번호="idx"/>
     </div>
 
     <!-- 필터선택페이지 -->

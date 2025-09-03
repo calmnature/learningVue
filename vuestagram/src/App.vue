@@ -11,20 +11,11 @@
       <img src="../public/favicon.ico" class="logo"/>
     </div>
 
-    <!-- 
-      버튼을 누르면 state의 name을 'park'으로 변경
-      1. store.js에 state 수정 방법 정의
-      2. 수정하고 싶으면 store.js에 부탁
-    -->
-    <h4>안녕 {{ $store.state.name }}</h4>
-    <!-- 2. 부탁 : $store.commit('함수명') -->
+    <!-- <h4>안녕 {{ $store.state.name }}</h4>
     <button @click="$store.commit('changeName')">버튼</button>
     
-    <!-- Q1. 데이터바인딩 -->
     <h4>너의 나이는 {{ $store.state.age }}</h4>
-    <!-- Q2. 나이 증가 함수 호출 -->
-    <!-- $store.commit('함수명', 데이터)를 하면 store의 함수에 데이터가 전달이 됨 -->
-    <button @click="$store.commit('increamentAge', 10)">나이가 증가하는 버튼</button>
+    <button @click="$store.commit('increamentAge', 10)">나이가 증가하는 버튼</button> -->
 
     <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event" :선택된필터="선택된필터"/>
     <button @click="more">더보기</button>
