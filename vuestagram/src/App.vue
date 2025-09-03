@@ -5,13 +5,14 @@
         <li>Cancel</li>
       </ul>
       <ul class="header-button-right">
-        <li>Next</li>
+        <li @click="step++" v-if="step == 1">Next</li>
+        <li @click="publish" v-if="step == 2" >발행</li>
       </ul>
-      <img src="../public/favicon.ico" class="logo" />
+      <img src="../public/favicon.ico" class="logo"/>
     </div>
 
     <!-- 숙제 : 업로드한 이미지를 step1, step2에서 보여주기 -->
-    <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl"/>
+    <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
@@ -20,6 +21,8 @@
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
+
+    <div style="margin-top: 400px"></div>
   </div>
 </template>
 
@@ -32,44 +35,62 @@ export default {
   name: "App",
   data() {
     return {
-      인스타데이터 : instaData,
-      moreIdx : 0,
-      step : 0,
-      imageUrl : '',
-    }
+      인스타데이터: instaData,
+      moreIdx: 0,
+      step: 0,
+      imageUrl: "",
+      userWrite: "",
+    };
   },
   components: {
     Container: Container,
   },
   methods: {
     more() {
-      if(this.moreIdx > 1) this.moreIdx -= 2;
-      axios.get(`https://codingapple1.github.io/vue/more${this.moreIdx}.json`)
-      .then(result => {
-        // 요청 성공 시 실행할 코드
-        console.log(result.data);
-        this.인스타데이터.push(result.data);
-        this.moreIdx++;
-      })
+      if (this.moreIdx > 1) this.moreIdx -= 2;
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.moreIdx}.json`)
+        .then((result) => {
+          // 요청 성공 시 실행할 코드
+          console.log(result.data);
+          this.인스타데이터.push(result.data);
+          this.moreIdx++;
+        });
     },
 
     upload(e) {
       let file = e.target.files;
       console.log(file);
-      
+
       let url = URL.createObjectURL(file[0]);
       console.log(url);
 
       this.step = 1;
-      this.imageUrl = url
-    }
-  }
+      this.imageUrl = url;
+    },
+
+    publish() {
+      let 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.imageUrl,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.userWrite,
+        filter: "perpetua",
+      };
+      console.log('??? : ' + this.userWrite);
+      this.인스타데이터.unshift(내게시물);
+      this.step = 0;
+    },
+  },
 };
 </script>
 
 <style>
 .show {
- display: block; 
+  display: block;
 }
 
 .hide {
