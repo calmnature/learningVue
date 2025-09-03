@@ -1,10 +1,18 @@
 <template>
-  <div class="filter-item" :class="filter" :style="`background-image:url(${imageUrl})`"></div>
+  <div :class="`${filter} filter-item`" :style="`background-image:url(${imageUrl})`">
+    <slot></slot>
+    <!-- <slot :sendData="sendData"></slot> -->
+  </div>
 </template>
 
 <script>
 export default {
     name: 'FilterBox',
+    data() {
+        return {
+            sendData : "child to parent",
+        }
+    },
     props: {
         imageUrl: String,
         filter: String,
