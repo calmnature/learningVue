@@ -11,25 +11,16 @@
       <img src="../public/favicon.ico" class="logo"/>
     </div>
 
-    <p>{{ name }} {{ age }} {{ likes[0] }}</p>
+    <!-- <p>{{ name }} {{ age }} {{ likes[0] }}</p>
     <p>{{ 내이름 }}</p>
 
     <h4>너의 나이는 {{ $store.state.age }}</h4>
     <button @click="$store.commit('increamentAge', 10)">나이가 증가하는 버튼(기본)</button>
-    <button @click="increamentAge(10)">나이가 증가하는 버튼(vuex)</button>
+    <button @click="increamentAge(10)">나이가 증가하는 버튼(vuex)</button> -->
 
     <Container :인스타데이터="인스타데이터" :step="step" :imageUrl="imageUrl" @write="userWrite = $event" :선택된필터="선택된필터"/>
-    <button @click="more">더보기</button>
-
-    <!-- 
-      methods의 now 함수는 버튼이 클릭될 때마다 재 렌더링이 되면서 시간이 초기화 됨
-      computed의 now2 함수는 버튼이 클릭되도 재 렌더링이 되지 않고 사이트 첫 로딩 시의 값을 가지고 있음
-        - 데이터 결과 저장 공간으로 생각하면 된다 함
-        - computed의 함수는 소괄호 ()를 붙이지 않고 함수명만 작성
-    -->
-    <!-- <p>{{ now() }} {{ 카운터 }}</p>
-    <p>{{ now2 }} {{ 카운터 }}</p>
-    <button @click="카운터++">버튼</button> -->
+    
+    <!-- <button @click="more">더보기</button> -->
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -54,11 +45,10 @@ export default {
     return {
       인스타데이터: instaData,
       moreIdx: 0,
-      step: 0,
+      step: 3,
       imageUrl: "",
       userWrite: "",
       선택된필터: "",
-      // 카운터: 0,
     };
   },
   components: {
@@ -70,34 +60,13 @@ export default {
     });
   },
   computed: { // 계산 결과 저장용 함수들에 주로 사용
-    // now2() {
-    //   // computed의 함수는 사용해도 실행되지 않음
-    //   // 처음 실행하고 값을 간직
-    //   return new Date();
-    // },
-
-    // mapState를 사용하면 state를 꺼내는 코드가 짧아짐
     name() {
       return this.$store.state.name;
     },
-    /**
-     * 문법 (vuex의 mapState import 필수)
-     * ...mapState(['state변수명', 'state변수명', ...])
-     * ...mapState({작명 : 'state변수명', ...})
-     */
     ...mapState(['name', 'age', 'likes',]),
     ...mapState({내이름 : 'name',}),
   },
   methods: {
-    // now() {
-    //   // methods의 함수는 사용할 때마다 실행
-    //   return new Date();
-    // },
-
-    /**
-     * vuex mutations 함수 
-     * ...mapMutations([''])
-    */
     ...mapMutations(['setMore', 'increamentAge']),
 
     more() {

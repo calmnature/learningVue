@@ -27,17 +27,11 @@ const store = createStore({
             state.more = data;
         },
     },
-    // actions : ajax 요청에 관련된 곳
     actions: {
-        // actions의 파라미터는 이곳의 전쳬(store)를 의미함.
-        // 관습적으로 context를 사용한다고 힘
         getData(context) {
             axios.get('https://codingapple1.github.io/vue/more0.json')
             .then((res) => {
-                // axios로 받은 데이터를 state.more에 저장해야 함
                 console.log(res.data);
-                // actions 후에 state 변경?
-                // 반드시 mutations가 해야만 함
                 context.commit('setMore', res.data);
             })
         }
