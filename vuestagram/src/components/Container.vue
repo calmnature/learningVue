@@ -23,7 +23,7 @@
     </div>
 
     <div v-if="step == 3">
-      <MyPage/>
+      <MyPage :one="1"/>
     </div>
   </div>
 </template>
